@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AUTOMOTORES J.J SOLIS | Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: "#8F1D2C",
+                        black: "#030303",
+                        dark: "#0a0a0c",
+                        slate: "#111113",
+                        white: "#ffffff",
+                    },
+                    fontFamily: {
+                        sans: ["'Inter'", "sans-serif"],
+                        heading: ["'Space Grotesk'", "sans-serif"]
+                    },
+                    animation: {
+                        'marquee': 'marquee 34s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%':   { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        ::selection { background-color: #8F1D2C; color: #ffffff; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #2d3036; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8F1D2C; }
+
+        /* ── Reveal animations ── */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.96);
+            transition: opacity 1.6s ease-out, transform 1.6s ease-out;
+        }
+        .reveal-up.in-view, .reveal-scale.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* ── Hover photo zoom ── */
+        .hover-img-zoom { overflow: hidden; }
+        .hover-img-zoom img {
+            transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-img-zoom:hover img { transform: scale(1.06); }
+
+        /* ── Subtle grid texture ── */
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image:
+                linear-gradient(to right,  rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,.025) 1px, transparent 1px);
+        }
+
+        /* ── Service card sweep ── */
+        .service-card { position: relative; overflow: hidden; }
+        .service-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(143,29,44,.06);
+            transform: translateY(100%);
+            transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-card:hover::before { transform: translateY(0); }        @media (max-width: 639px) {
+            .animate-marquee { animation-duration: 22s !important; }
+        }
+        @media (min-width: 640px) and (max-width: 767px) {
+            .animate-marquee { animation-duration: 28s !important; }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+<!-- ═══════════════════════  NAV  ═══════════════════════ -->
+<nav class="absolute top-0 md:fixed md:top-0 w-full z-50 mix-blend-difference px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none">
+    <div class="flex items-center"><img src="./logo.jpg" alt="Automotores J.J Solis" width="80" height="80" class="w-16 h-16 md:w-20 md:h-20 object-contain" fetchpriority="high"></div>
+    <div class="flex gap-3 sm:gap-5 md:gap-12 pointer-events-auto">
+        <a href="#inventario" class="text-[0.65rem] sm:text-xs uppercase tracking-widest font-bold hover:text-burgundy transition-colors duration-300">Stock</a>
+        <a href="#servicios"  class="hidden sm:inline text-[0.65rem] sm:text-xs uppercase tracking-widest font-bold hover:text-burgundy transition-colors duration-300">Servicios</a>
+        <a href="#nosotros"   class="hidden sm:inline text-[0.65rem] sm:text-xs uppercase tracking-widest font-bold hover:text-burgundy transition-colors duration-300">Nosotros</a>
+        <a href="#contacto"   class="text-[0.65rem] sm:text-xs uppercase tracking-widest font-bold text-burgundy hover:text-white transition-colors duration-300">Contacto</a>
+    </div>
+    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" aria-label="Consultar por WhatsApp" class="pointer-events-auto inline-flex items-center justify-center gap-2 bg-burgundy text-white w-10 h-10 md:w-auto md:h-auto md:px-4 md:py-3 shadow-[0_4px_18px_rgba(143,29,44,.28)] hover:bg-white hover:text-burgundy active:scale-95 transition-all duration-300"><svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 1 4.37 1 11c0 2.1.6 4.2 1.8 6L1.5 23 7.7 21.4c1.4.8 2.9 1.2 4.3 1.2A11 11 0 1 0 12 0zm0 20.5c-1.4 0-2.8-.4-4-1.2l-.5-.3-3.7 1 1-3.6-.3-.5A9 9 0 1 1 12 20.5zm5-6.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2l-1 1.1c-.2.2-.4.2-.7.1-1.8-.9-3-1.6-4.2-3.7-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.5s1.1 2.9 1.3 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.8.5-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg><span class="hidden md:inline font-heading font-bold text-[0.65rem] uppercase tracking-widest">WhatsApp</span></a></nav>
+
+<!-- ═══════════════════════  HERO  ═══════════════════════ -->
+<section class="relative min-h-[88svh] sm:min-h-[100svh] w-full flex flex-col justify-end">
+    <div class="absolute inset-0 z-[-1] bg-black">
+        <video autoplay loop muted playsinline preload="auto"
+               class="w-full h-full object-cover object-[62%_center] sm:object-center brightness-[.82] contrast-125">
+            <source src="./AQNxPNSpRiWBvc6RhZWCunPZvdtHBEPkakRXyVQKcivxJwtfWy39lyaveOGIJvrbRR_Xfs6Hq0Wqkr3Ta2HZbzsDKFdAHnce.mp4" type="video/mp4" />
+        </video>
+        <!-- bottom vignette only, top very light -->
+        <div class="absolute bottom-0 inset-x-0 h-[65%] bg-gradient-to-t from-black via-black/55 to-transparent"></div>
+        <div class="absolute top-0   inset-x-0 h-[18%] bg-gradient-to-b from-black/30 to-transparent"></div>
+    </div>
+
+    <div class="relative w-full px-6 md:px-12 pb-12 md:pb-20">
+        <div class="max-w-[120rem] mx-auto flex flex-col xl:flex-row xl:justify-between xl:items-end gap-10 xl:gap-16">
+
+            <!-- Left: Title -->
+            <div class="reveal-up">
+                <div class="w-14 h-[3px] bg-burgundy mb-6 md:mb-8"></div>
+                <h1 class="font-heading font-bold uppercase tracking-tighter
+                           text-[2.4rem] leading-[0.9]
+                           sm:text-6xl
+                           md:text-7xl
+                           lg:text-[7.5rem]
+                           xl:text-[9rem]
+                           text-white drop-shadow-2xl">
+                    ENCONTRÁ TU<br/>
+                    <span class="text-burgundy">PRÓXIMO</span> VEHÍCULO
+                </h1>
+                <p class="font-heading text-lg sm:text-xl md:text-2xl text-gray-300 mt-4 tracking-tight">EN RÍO GRANDE</p>
+            </div>
+
+            <!-- Right: Sub + CTAs -->
+            <div class="flex flex-col gap-6 xl:max-w-xs reveal-up delay-200">
+                <p class="font-sans font-light text-sm md:text-base text-gray-300 leading-relaxed border-l-2 border-burgundy pl-4">
+                    0km y usados seleccionados.<br/>
+                    Toma de usados. Financiación bancaria.<br/>
+                    Gestoría integral.
+                </p>
+                <div class="flex flex-col sm:flex-row xl:flex-col gap-3">
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank"
+                       class="flex items-center justify-center gap-3 px-7 py-4 bg-burgundy text-white font-heading font-bold text-xs uppercase tracking-widest
+                              hover:bg-white hover:text-burgundy transition-colors duration-300 shadow-[0_0_30px_rgba(143,29,44,.35)]">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 1 4.37 1 11c0 2.1.6 4.2 1.8 6L1.5 23 7.7 21.4c1.4.8 2.9 1.2 4.3 1.2A11 11 0 1 0 12 0zm0 20.5c-1.4 0-2.8-.4-4-1.2l-.5-.3-3.7 1 1-3.6-.3-.5A9 9 0 1 1 12 20.5zm5-6.7c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2l-1 1.1c-.2.2-.4.2-.7.1-1.8-.9-3-1.6-4.2-3.7-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.5s1.1 2.9 1.3 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.8.5-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>                        Consultar por WhatsApp
+                    </a>
+                    <a href="#inventario"
+                       class="flex items-center justify-center px-7 py-4 border border-white/40 text-white font-heading font-bold text-xs uppercase tracking-widest
+                              hover:border-white hover:bg-white/10 transition-colors duration-300">
+                        Ver Inventario
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════  TRUST BAR  ═══════════════════════ -->
+<div class="border-b border-white/10 bg-dark py-5 px-6 md:px-12">
+    <div class="max-w-[120rem] mx-auto flex flex-wrap justify-center md:justify-between items-center gap-4
+                font-heading uppercase tracking-widest text-[0.6rem] md:text-xs text-gray-400 font-bold">
+        <span>+61 Vehículos Publicados</span>
+        <span class="text-burgundy hidden md:inline">•</span>
+        <span>Atención Personalizada · Río Grande</span>
+        <span class="text-burgundy hidden md:inline">•</span>
+        <span>Toma de Usados · Financiación</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════  INVENTARIO  ═══════════════════════ -->
+<section id="inventario" class="bg-black pt-20 md:pt-32">
+
+    <!-- Header -->
+    <div class="max-w-[120rem] mx-auto px-6 md:px-12 mb-12 md:mb-16 reveal-up">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+                <p class="text-[0.6rem] uppercase tracking-[0.2em] text-burgundy font-bold mb-3">Automotores J.J Solis</p>
+                <h2 class="font-heading uppercase tracking-tighter text-5xl md:text-7xl font-bold leading-none">Inventario</h2>
+            </div>
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20stock%20disponible%20de%20Automotores%20J.J%20Solis."
+               target="_blank"
+               class="inline-flex items-center gap-3 bg-burgundy text-white px-6 py-3 text-xs font-heading font-bold uppercase tracking-widest
+                      hover:bg-white hover:text-burgundy transition-colors duration-300 self-start md:self-auto">
+                Ver todo el stock →
+            </a>
+        </div>
+        <div class="w-16 h-[2px] bg-burgundy mt-6"></div>
+    </div>
+
+    <!-- ── 1. PROTAGONISTA: Mercedes full-bleed ── -->
+    <div class="relative w-full h-[65vh] md:h-[85vh] overflow-hidden group hover-img-zoom">
+        <img src="./645727445_18082087436581610_4925602010024437475_n.jpg"
+             loading="eager"
+             class="w-full h-full object-cover object-center brightness-[.88] contrast-110"
+             alt="Mercedes-Benz C 250 Sport AMG 2018">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+        <span class="absolute top-6 right-6 md:top-10 md:right-10 font-mono text-[0.6rem] text-white/30 tracking-widest">01 / 07</span>
+        <div class="absolute bottom-0 left-0 w-full p-6 md:p-14 lg:p-20">
+            <div class="max-w-[120rem] mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+                <div>
+                    <h3 class="font-heading text-4xl sm:text-5xl md:text-[4.5rem] lg:text-[6rem] font-bold uppercase tracking-tighter text-white leading-[0.85]">
+                        Mercedes-Benz<br/>C 250 AMG
+                    </h3>
+                    <div class="flex items-center gap-4 mt-4">
+                        <span class="text-burgundy font-bold text-xl font-heading">2018</span>
+                        <span class="w-8 h-px bg-white/30"></span>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-bold">Sport AMG</span>
+                    </div>
+                </div>
+                <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Mercedes-Benz%20C%20250%20Sport%20AMG%202018."
+                   target="_blank"
+                   class="self-start md:self-auto shrink-0 inline-flex min-h-[44px] items-center gap-2 bg-burgundy text-white px-5 py-3
+                          text-[0.65rem] font-heading font-bold uppercase tracking-widest
+                          hover:bg-white hover:text-burgundy transition-colors duration-300
+                          shadow-[0_0_25px_rgba(143,29,44,.4)]">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── 2. Kia + Chery: lado a lado, misma altura de fila ── -->
+    <!-- Usamos un div con height fija para garantizar que ambas columnas sean iguales y no haya gaps -->
+    <div class="px-4 md:px-6 pt-4 md:pt-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+
+            <!-- Kia: left -->
+            <div class="relative overflow-hidden group hover-img-zoom h-[68vw] min-h-[16rem] sm:h-auto sm:min-h-0 sm:aspect-[4/3]">
+                <img src="./819560584_18108963737581610_5388824451911739935_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_60%] brightness-[.85] contrast-110"
+                     alt="Kia Seltos LX 2024">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">02 / 07</span>
+                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
+                    <div>
+                        <h4 class="font-heading text-3xl md:text-4xl font-bold uppercase tracking-tighter text-white mb-1">Kia Seltos LX</h4>
+                        <span class="text-burgundy font-bold text-lg font-heading">2024</span>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20la%20Kia%20Seltos%20LX%202024."
+                       target="_blank"
+                       class="self-start inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Chery: right -->
+            <div class="relative overflow-hidden group hover-img-zoom h-[68vw] min-h-[16rem] sm:h-auto sm:min-h-0 sm:aspect-[4/3]">
+                <img src="./819883023_18109448336581610_2420078120238172914_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_40%] brightness-[.85] contrast-110"
+                     alt="Chery Tiggo 4 Pro 2023">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">03 / 07</span>
+                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full flex flex-col gap-3">
+                    <div>
+                        <h4 class="font-heading text-3xl md:text-4xl font-bold uppercase tracking-tighter text-white mb-1">Chery Tiggo 4 Pro</h4>
+                        <span class="text-burgundy font-bold text-lg font-heading">2023</span>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20la%20Chery%20Tiggo%204%20Pro%202023."
+                       target="_blank"
+                       class="self-start inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── 3. Bento 4 secundarios — sin huecos: alturas explícitas por row ── -->
+    <div class="px-4 md:px-6 pt-4 md:pt-6">
+
+        <!-- FILA A: JAC (wide) + SW4 (narrow) — misma altura fijada -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 md:gap-6 mb-4 md:mb-6">
+
+            <!-- JAC T8: 7 cols -->
+            <div class="sm:col-span-7 relative overflow-hidden group hover-img-zoom
+                        h-[68vw] min-h-[16rem] sm:h-[30vw] sm:min-h-0 md:h-[28vw]">
+                <img src="./574181886_18069034685581610_2674903874567984419_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_55%] brightness-75 contrast-115"
+                     alt="JAC T8 2.0 TCI 4x4">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">04 / 07</span>
+                <div class="absolute bottom-0 left-0 p-5 md:p-8 w-full flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                    <div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-tighter text-white mb-1
+                                   group-hover:text-burgundy transition-colors duration-400">JAC T8 2.0 TCI 4x4</h4>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20la%20JAC%20T8%202.0%20TCI%204x4."
+                       target="_blank"
+                       class="self-start shrink-0 inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+            <!-- SW4: 5 cols — misma altura exacta que JAC -->
+            <div class="sm:col-span-5 relative overflow-hidden group hover-img-zoom
+                        h-[68vw] min-h-[16rem] sm:h-[30vw] sm:min-h-0 md:h-[28vw]">
+                <img src="./608354827_18076154273581610_5971532232021620179_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_40%] brightness-75 contrast-115"
+                     alt="Toyota SW4 SRX 4x4">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">05 / 07</span>
+                <div class="absolute bottom-0 left-0 p-5 md:p-8 w-full flex flex-col gap-3">
+                    <div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-tighter text-white mb-1
+                                   group-hover:text-burgundy transition-colors duration-400">Toyota SW4 SRX 4x4</h4>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20la%20Toyota%20SW4%20SRX%204x4."
+                       target="_blank"
+                       class="self-start inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FILA B: Hilux (narrow) + Jeep (wide) — misma altura fijada -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 md:gap-6">
+
+            <!-- Hilux: 5 cols -->
+            <div class="sm:col-span-5 relative overflow-hidden group hover-img-zoom
+                        h-[68vw] min-h-[16rem] sm:h-[30vw] sm:min-h-0 md:h-[28vw]">
+                <img src="./619871726_18077826782581610_5267682748931631418_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_50%] brightness-75 contrast-115"
+                     alt="Toyota Hilux 2.8 SRV 4x4">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">06 / 07</span>
+                <div class="absolute bottom-0 left-0 p-5 md:p-8 w-full flex flex-col gap-3">
+                    <div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-tighter text-white mb-1
+                                   group-hover:text-burgundy transition-colors duration-400">Toyota Hilux 2.8 SRV 4x4</h4>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20la%20Toyota%20Hilux%202.8%20SRV%204x4."
+                       target="_blank"
+                       class="self-start inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Jeep Renegade: 7 cols -->
+            <div class="sm:col-span-7 relative overflow-hidden group hover-img-zoom
+                        h-[68vw] min-h-[16rem] sm:h-[30vw] sm:min-h-0 md:h-[28vw]">
+                <img src="./629666050_18079647647581610_4239241025008986452_n.jpg"
+                     loading="lazy"
+                     class="w-full h-full object-cover object-[center_50%] brightness-75 contrast-115"
+                     alt="Jeep Renegade Sport 1.8">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 right-4 font-mono text-[0.55rem] text-white/25 tracking-widest">07 / 07</span>
+                <div class="absolute bottom-0 left-0 p-5 md:p-8 w-full flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+                    <div>
+                        <h4 class="font-heading text-2xl md:text-3xl font-bold uppercase tracking-tighter text-white mb-1
+                                   group-hover:text-burgundy transition-colors duration-400">Jeep Renegade Sport 1.8</h4>
+                    </div>
+                    <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Jeep%20Renegade%20Sport%201.8."
+                       target="_blank"
+                       class="self-start shrink-0 inline-flex items-center gap-2 bg-burgundy text-white shadow-[0_4px_18px_rgba(143,29,44,.28)]
+                              text-[0.65rem] font-heading font-bold uppercase tracking-widest min-h-[44px] px-5 py-3
+                              hover:bg-white hover:text-burgundy transition-colors duration-300">
+                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/></svg>
+                        Consultar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── 4. LISTA EDITORIAL ── -->
+    <div class="max-w-[110rem] mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-20 md:pb-32 reveal-up">
+        <div class="flex items-center gap-6 mb-12">
+            <span class="font-heading uppercase tracking-[0.15em] text-gray-600 font-bold text-[0.6rem]">Más Unidades Disponibles</span>
+            <div class="flex-1 h-px bg-white/8"></div>
+        </div>
+        <div>
+
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Renault%20Kardian%20Evolution%20200%202025."
+               target="_blank"
+               class="group grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-8 py-6 md:py-10 border-b border-white/8 hover:border-white/30 transition-all duration-400">
+                <h4 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-tighter text-gray-400 group-hover:text-white transition-colors duration-400 col-span-1 md:col-span-2">Renault Kardian Evolution 200</h4>
+                <div class="flex md:justify-end items-center gap-6 md:gap-8">
+                    <div class="text-left md:text-right">
+                        <span class="text-burgundy font-bold text-sm block font-heading">2025 · 23.000 km</span>
+                        <span class="text-white text-xl font-heading font-bold">$35.000.000</span>
+                    </div>
+                    <span class="shrink-0 inline-flex min-h-[44px] items-center justify-center bg-burgundy px-4 text-[0.65rem] uppercase tracking-widest font-bold text-white shadow-[0_3px_12px_rgba(143,29,44,.3)] group-hover:bg-white group-hover:text-burgundy transition-colors">Consultar →</span>
+                </div>
+            </a>
+
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Lexus%20UX%20250h%20Hybrid%202022."
+               target="_blank"
+               class="group grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-8 py-6 md:py-10 border-b border-white/8 hover:border-white/30 transition-all duration-400">
+                <h4 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-tighter text-gray-400 group-hover:text-white transition-colors duration-400 col-span-1 md:col-span-2">Lexus UX 250h Hybrid</h4>
+                <div class="flex md:justify-end items-center gap-6 md:gap-8">
+                    <div class="text-left md:text-right">
+                        <span class="text-burgundy font-bold text-sm block font-heading">2022</span>
+                        <span class="text-white text-xl font-heading font-bold">USD 33.000</span>
+                    </div>
+                    <span class="shrink-0 inline-flex min-h-[44px] items-center justify-center bg-burgundy px-4 text-[0.65rem] uppercase tracking-widest font-bold text-white shadow-[0_3px_12px_rgba(143,29,44,.3)] group-hover:bg-white group-hover:text-burgundy transition-colors">Consultar →</span>
+                </div>
+            </a>
+
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Toyota%20Yaris%20S%202025."
+               target="_blank"
+               class="group grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-8 py-6 md:py-10 border-b border-white/8 hover:border-white/30 transition-all duration-400">
+                <h4 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-tighter text-gray-400 group-hover:text-white transition-colors duration-400 col-span-1 md:col-span-2">Toyota Yaris S</h4>
+                <div class="flex md:justify-end items-center gap-6 md:gap-8">
+                    <div class="text-left md:text-right">
+                        <span class="text-burgundy font-bold text-sm block font-heading">2025</span>
+                        <span class="text-white text-xl font-heading font-bold">0 km</span>
+                    </div>
+                    <span class="shrink-0 inline-flex min-h-[44px] items-center justify-center bg-burgundy px-4 text-[0.65rem] uppercase tracking-widest font-bold text-white shadow-[0_3px_12px_rgba(143,29,44,.3)] group-hover:bg-white group-hover:text-burgundy transition-colors">Consultar →</span>
+                </div>
+            </a>
+
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Renault%20Kwid%20Zen%202019."
+               target="_blank"
+               class="group grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-8 py-6 md:py-10 border-b border-white/8 hover:border-white/30 transition-all duration-400">
+                <h4 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-tighter text-gray-400 group-hover:text-white transition-colors duration-400 col-span-1 md:col-span-2">Renault Kwid Zen</h4>
+                <div class="flex md:justify-end items-center gap-6 md:gap-8">
+                    <div class="text-left md:text-right">
+                        <span class="text-burgundy font-bold text-sm block font-heading">2019</span>
+                        
+                    </div>
+                    <span class="shrink-0 inline-flex min-h-[44px] items-center justify-center bg-burgundy px-4 text-[0.65rem] uppercase tracking-widest font-bold text-white shadow-[0_3px_12px_rgba(143,29,44,.3)] group-hover:bg-white group-hover:text-burgundy transition-colors">Consultar →</span>
+                </div>
+            </a>
+
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20Toyota%20Etios%201.5%20XLS%20Pack%202023."
+               target="_blank"
+               class="group grid grid-cols-1 md:grid-cols-3 items-center gap-2 md:gap-8 py-6 md:py-10 border-b border-white/8 hover:border-white/30 transition-all duration-400">
+                <h4 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-tighter text-gray-400 group-hover:text-white transition-colors duration-400 col-span-1 md:col-span-2">Toyota Etios 1.5 XLS Pack</h4>
+                <div class="flex md:justify-end items-center gap-6 md:gap-8">
+                    <div class="text-left md:text-right">
+                        <span class="text-burgundy font-bold text-sm block font-heading">2023</span>
+                        
+                    </div>
+                    <span class="shrink-0 inline-flex min-h-[44px] items-center justify-center bg-burgundy px-4 text-[0.65rem] uppercase tracking-widest font-bold text-white shadow-[0_3px_12px_rgba(143,29,44,.3)] group-hover:bg-white group-hover:text-burgundy transition-colors">Consultar →</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══ BOTÓN WHATSAPP FLOTANTE ═══ -->
+<a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20stock%20disponible%20de%20Automotores%20J.J%20Solis."
+   target="_blank"
+   aria-label="Consultar por WhatsApp"
+   class="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-5 md:right-6 z-50 flex h-12 w-12 items-center justify-center gap-3 md:h-auto md:w-auto md:justify-start
+          bg-burgundy text-white
+          p-0 md:pl-5 md:pr-6 md:py-4
+          shadow-[0_4px_30px_rgba(143,29,44,.5)]
+          hover:shadow-[0_6px_40px_rgba(143,29,44,.7)]
+          hover:scale-105 active:scale-95
+          transition-all duration-300">
+    <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.09 1.504 5.808L0 24l6.337-1.474A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.37l-.36-.213-3.761.876.946-3.658-.234-.375A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
+    </svg>
+    <span class="hidden md:inline font-heading font-bold text-xs uppercase tracking-widest">WhatsApp</span>
+</a>
+
+
+<!-- ═══════════════════════  MULTIMARCA  ═══════════════════════ -->
+<!-- Dark background, white text marquee — no blend mode issues -->
+<div class="w-full overflow-hidden bg-slate py-8 border-y border-white/8 reveal-scale">
+    <div class="flex whitespace-nowrap animate-marquee select-none
+                font-heading text-4xl sm:text-5xl md:text-6xl font-bold uppercase tracking-tighter text-white/20">
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Toyota</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Volkswagen</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Renault</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Jeep</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Ford</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Kia</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Chery</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">JAC</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Lexus</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Mercedes-Benz</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">DS</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Fiat</span><span class="mx-8 text-burgundy">•</span>
+        <!-- duplicate for seamless loop -->
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Toyota</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Volkswagen</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Renault</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Jeep</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Ford</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Kia</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Chery</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">JAC</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Lexus</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Mercedes-Benz</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">DS</span><span class="mx-8 text-burgundy">•</span>
+        <span class="mx-8 hover:text-white transition-colors cursor-default">Fiat</span><span class="mx-8 text-burgundy">•</span>
+    </div>
+</div>
+
+<!-- ═══════════════════════  SERVICIOS  ═══════════════════════ -->
+<section id="servicios" class="py-16 md:py-36 bg-dark bg-grid border-b border-white/5 relative overflow-hidden">
+    <!-- Subtle burgundy glow right edge -->
+    <div class="absolute right-0 top-0 w-1/4 h-full bg-gradient-to-l from-burgundy/8 to-transparent pointer-events-none"></div>
+
+    <div class="max-w-[120rem] mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-14 lg:gap-28">
+
+        <div class="lg:w-1/3 reveal-up">
+            <h2 class="font-heading uppercase tracking-tighter text-5xl sm:text-6xl md:text-7xl font-bold mb-5 text-white leading-none">
+                Nuestros<br/>Servicios
+            </h2>
+            <p class="text-gray-400 font-light text-lg">Atención personalizada en cada etapa de tu compra.</p>
+        </div>
+
+        <div class="lg:w-2/3 flex flex-col gap-0 reveal-up delay-200">
+
+            <div class="service-card group relative border-b border-white/10 py-6 md:py-8 first:border-t hover:border-burgundy transition-colors duration-300 cursor-default active:bg-white/[.025]">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center gap-3 md:gap-8">
+                    <div class="flex items-center gap-5 min-w-0">
+                        <span class="font-mono text-2xl md:text-3xl text-burgundy/70 group-hover:text-white transition-colors font-bold shrink-0">01</span>
+                        <h3 class="min-w-0 font-heading text-xl sm:text-2xl md:text-3xl leading-tight font-bold uppercase tracking-tighter text-white">Venta de 0km y Usados</h3>
+                    </div>
+                    <p class="font-light text-gray-400 text-sm md:text-base leading-relaxed max-w-xs group-hover:text-gray-200 transition-colors">
+                        Asesoramiento experto para encontrar la unidad perfecta.
+                    </p>
+                </div>
+            </div>
+
+            <div class="service-card group relative border-b border-white/10 py-6 md:py-8 first:border-t hover:border-burgundy transition-colors duration-300 cursor-default active:bg-white/[.025]">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center gap-3 md:gap-8">
+                    <div class="flex items-center gap-5 min-w-0">
+                        <span class="font-mono text-2xl md:text-3xl text-burgundy/70 group-hover:text-white transition-colors font-bold shrink-0">02</span>
+                        <h3 class="min-w-0 font-heading text-xl sm:text-2xl md:text-3xl leading-tight font-bold uppercase tracking-tighter text-white">Toma de Usados</h3>
+                    </div>
+                    <p class="font-light text-gray-400 text-sm md:text-base leading-relaxed max-w-xs group-hover:text-gray-200 transition-colors">
+                        Cotizamos con transparencia. Tu auto como parte de pago.
+                    </p>
+                </div>
+            </div>
+
+            <div class="service-card group relative border-b border-white/10 py-6 md:py-8 first:border-t hover:border-burgundy transition-colors duration-300 cursor-default active:bg-white/[.025]">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center gap-3 md:gap-8">
+                    <div class="flex items-center gap-5 min-w-0">
+                        <span class="font-mono text-2xl md:text-3xl text-burgundy/70 group-hover:text-white transition-colors font-bold shrink-0">03</span>
+                        <h3 class="min-w-0 font-heading text-xl sm:text-2xl md:text-3xl leading-tight font-bold uppercase tracking-tighter text-white">Financiación Bancaria</h3>
+                    </div>
+                    <p class="font-light text-gray-400 text-sm md:text-base leading-relaxed max-w-xs group-hover:text-gray-200 transition-colors">
+                        Crédito a medida con las mejores tasas del mercado.
+                    </p>
+                </div>
+            </div>
+
+            <div class="service-card group relative border-b border-white/10 py-6 md:py-8 first:border-t hover:border-burgundy transition-colors duration-300 cursor-default active:bg-white/[.025]">
+                <div class="relative z-10 flex flex-col md:flex-row justify-between md:items-center gap-3 md:gap-8">
+                    <div class="flex items-center gap-5 min-w-0">
+                        <span class="font-mono text-2xl md:text-3xl text-burgundy/70 group-hover:text-white transition-colors font-bold shrink-0">04</span>
+                        <h3 class="min-w-0 font-heading text-xl sm:text-2xl md:text-3xl leading-tight font-bold uppercase tracking-tighter text-white">Gestoría Integral</h3>
+                    </div>
+                    <p class="font-light text-gray-400 text-sm md:text-base leading-relaxed max-w-xs group-hover:text-gray-200 transition-colors">
+                        Trámites y transferencias sin que te preocupes por nada.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════  SEGUNDO VIDEO  ═══════════════════════ -->
+<section class="relative py-8 sm:py-16 md:py-28 px-4 sm:px-6 md:px-12 bg-black border-b border-white/5">
+    <div class="max-w-[120rem] mx-auto reveal-up">
+        <div class="relative w-full overflow-hidden bg-dark group">
+            <video autoplay loop muted playsinline preload="none"
+                   class="w-full aspect-[4/3] sm:aspect-video object-cover object-center block brightness-[0.72] contrast-110
+                          group-hover:scale-[1.02] transition-transform duration-[2.5s] ease-out">
+                <source src="./GRAN INAUGURACIÓN‼️Estamos muy felices de darles la bienvenida a nuestra nueva concesionaria de.mp4" type="video/mp4" />
+            </video>
+            <!-- Centre text — light translucent, no solid box -->
+            <div class="absolute inset-0 flex items-center justify-center p-6 pointer-events-none">
+                <div class="text-center pointer-events-auto">
+                    <span class="text-[0.6rem] sm:text-[0.65rem] text-burgundy uppercase tracking-[0.2em] font-bold block mb-2 sm:mb-4">Experiencia J.J Solis</span>
+                    <h2 class="font-heading text-3xl sm:text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white leading-[0.9] mb-3 sm:mb-6 drop-shadow-[0_2px_20px_rgba(0,0,0,.9)]">
+                        Conocé<br/>Nuestro Salón
+                    </h2>
+                    <p class="font-light text-gray-200 text-sm sm:text-lg mb-4 sm:mb-10 drop-shadow-md">Bilbao 727 · Río Grande</p>
+                    <a href="#contacto"
+                       class="inline-block border border-white text-white text-xs uppercase tracking-widest font-heading font-bold px-8 py-4
+                              hover:bg-burgundy hover:border-burgundy transition-colors duration-300 shadow-lg">
+                        Coordinar Visita
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════  SOBRE NOSOTROS  ═══════════════════════ -->
+<section id="nosotros" class="py-20 md:py-36 px-6 md:px-12 bg-black">
+    <div class="max-w-[120rem] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <!-- Text -->
+        <div class="flex flex-col justify-center order-2 lg:order-1 reveal-up">
+            <div class="w-14 h-[3px] bg-burgundy mb-7"></div>
+            <h2 class="font-heading uppercase tracking-tighter text-5xl md:text-7xl font-bold mb-8 leading-[0.88] text-white">
+                NUESTRA<br/>HISTORIA
+            </h2>
+            <p class="font-light text-lg md:text-xl text-gray-300 leading-relaxed mb-14 max-w-2xl">
+                Somos Automotores J.J Solis, una concesionaria familiar de Río Grande con local en Bilbao 727.
+                Desde 2022 acompañamos a nuestros clientes en la compra de su próximo vehículo,
+                con atención personalizada de Jorge, Marcelo y Facundo.
+                Trabajamos multimarca, con foco en Toyota, Volkswagen, Renault, Jeep, Kia y Chery.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-10">
+                <div>
+                    <span class="block font-heading text-5xl font-bold text-burgundy mb-1">+61</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-gray-400 font-bold block leading-snug">Vehículos<br/>Publicados</span>
+                </div>
+                <div>
+                    <span class="block font-heading text-5xl font-bold text-white mb-1">+29</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-gray-400 font-bold block leading-snug">Ventas<br/>2025</span>
+                </div>
+                <div>
+                    <span class="block font-heading text-5xl font-bold text-white mb-1">+18</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-gray-400 font-bold block leading-snug">Ventas<br/>2026</span>
+                </div>
+                <div>
+                    <span class="block font-heading text-5xl font-bold text-white mb-1">3</span>
+                    <span class="text-[0.65rem] uppercase tracking-widest text-gray-400 font-bold block leading-snug">Asesores<br/>Expertos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo — color, cinematic tone -->
+        <div class="relative group overflow-hidden w-full aspect-[4/5] lg:aspect-[3/4] order-1 lg:order-2 reveal-up delay-200">
+            <img src="./710461415_18093226412581610_4393573976450690047_n.jpg"
+                 loading="lazy"
+                 class="w-full h-full object-cover brightness-90 contrast-115 saturate-90
+                        group-hover:scale-[1.04] group-hover:saturate-110 transition-all duration-[3s] ease-out"
+                 alt="Showroom Automotores J.J Solis — Bilbao 727">
+            <div class="absolute inset-0 border-[10px] border-black/30 pointer-events-none"></div>
+            <!-- Subtle bottom gradient so it flows into page -->
+            <div class="absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════  CONTACTO + CTA FINAL  ═══════════════════════ -->
+<section id="contacto" class="relative bg-slate py-16 md:py-36 px-6 md:px-12 border-t border-white/5 overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-1/2 bg-gradient-to-b from-burgundy/12 to-transparent pointer-events-none"></div>
+
+    <div class="max-w-[120rem] mx-auto flex flex-col lg:flex-row justify-between gap-12 lg:gap-20 relative z-10">
+
+        <!-- Contactos -->
+        <div class="w-full lg:w-5/12 reveal-up">
+            <h2 class="font-heading uppercase tracking-tighter text-5xl md:text-6xl font-bold mb-10 md:mb-14 text-white">Contacto</h2>
+            <div class="flex flex-col gap-6 md:gap-10">
+
+                <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" class="group block border-b border-white/10 pb-7 hover:border-burgundy transition-colors duration-300">
+                    <span class="text-[0.65rem] text-burgundy uppercase tracking-[.18em] mb-2 block font-bold">Asesor Comercial</span>
+                    <h3 class="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tighter text-white group-hover:translate-x-2 transition-transform duration-300">Jorge</h3>
+                    <p class="font-light text-gray-400 mt-1 text-lg flex items-center justify-between gap-4"><span>02964 561181</span><span class="text-[0.6rem] uppercase tracking-widest font-bold text-burgundy">WhatsApp ↗</span></p>
+                </a>
+
+                <a href="https://wa.me/5492964603956?text=Hola%20Marcelo%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" class="group block border-b border-white/10 pb-7 hover:border-burgundy transition-colors duration-300">
+                    <span class="text-[0.65rem] text-burgundy uppercase tracking-[.18em] mb-2 block font-bold">Asesor Comercial</span>
+                    <h3 class="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tighter text-white group-hover:translate-x-2 transition-transform duration-300">Marcelo</h3>
+                    <p class="font-light text-gray-400 mt-1 text-lg flex items-center justify-between gap-4"><span>02964 603956</span><span class="text-[0.6rem] uppercase tracking-widest font-bold text-burgundy">WhatsApp ↗</span></p>
+                </a>
+
+                <a href="https://wa.me/5492964601331?text=Hola%20Facundo%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" class="group block border-b border-white/10 pb-7 hover:border-burgundy transition-colors duration-300">
+                    <span class="text-[0.65rem] text-burgundy uppercase tracking-[.18em] mb-2 block font-bold">Asesor Comercial</span>
+                    <h3 class="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tighter text-white group-hover:translate-x-2 transition-transform duration-300">Facundo</h3>
+                    <p class="font-light text-gray-400 mt-1 text-lg flex items-center justify-between gap-4"><span>02964 601331</span><span class="text-[0.6rem] uppercase tracking-widest font-bold text-burgundy">WhatsApp ↗</span></p>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Bloque CTA final -->
+        <div class="w-full lg:w-7/12 bg-black border border-white/10 border-t-2 border-t-burgundy/60 p-6 sm:p-10 md:p-20 flex flex-col items-center text-center justify-center reveal-up delay-200 shadow-2xl">
+            <h2 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase mb-5 sm:mb-6 tracking-tighter leading-[0.9] text-white">
+                ¿BUSCÁS TU<br/>PRÓXIMO VEHÍCULO?
+            </h2>
+            <p class="text-gray-400 text-base md:text-xl mb-8 sm:mb-12 font-light max-w-md leading-relaxed">
+                Consultanos por el stock disponible y recibí atención personalizada de nuestro equipo.
+            </p>
+            <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20quisiera%20consultar%20por%20el%20stock%20disponible%20de%20Automotores%20J.J%20Solis." target="_blank"
+               class="bg-burgundy text-white hover:bg-white hover:text-burgundy
+                      px-5 sm:px-8 md:px-12 py-4 sm:py-5 md:py-6 font-heading font-bold text-xs sm:text-sm md:text-lg uppercase tracking-widest
+                      transition-colors duration-300
+                      shadow-[0_0_40px_rgba(143,29,44,.4)]
+                      w-full sm:w-auto text-center">
+                CONSULTAR POR WHATSAPP
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════  FOOTER  ═══════════════════════ -->
+<footer class="py-12 px-6 md:px-12 bg-black border-t border-white/8 flex flex-col md:flex-row justify-between items-center gap-6">
+    <img src="./logo.jpg" alt="Automotores J.J Solis" width="88" height="88" class="w-16 h-16 md:w-[5.5rem] md:h-[5.5rem] object-contain" loading="lazy">
+    <div class="text-[0.65rem] text-gray-500 font-bold uppercase tracking-widest flex flex-col md:flex-row items-center gap-4 md:gap-12 text-center">
+        <span>Bilbao 727, Río Grande, Tierra del Fuego</span>
+        <a href="https://instagram.com/automotoresj.jsolis" target="_blank" class="hover:text-white transition-colors">@automotoresj.jsolis</a>
+        <a href="https://wa.me/5492964561181?text=Hola%20Jorge%2C%20vi%20la%20web%20de%20Automotores%20J.J%20Solis%20y%20quisiera%20consultar%20por%20un%20veh%C3%ADculo." target="_blank" class="hover:text-burgundy transition-colors">WhatsApp</a>
+    </div>
+</footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal-up, .reveal-scale').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
